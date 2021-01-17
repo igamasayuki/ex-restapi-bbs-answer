@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+  <title>掲示板</title>
+</head>
+<body>
+	<h1>掲示板アプリケーション(REST API版)</h1>
+	<div>
+		投稿者名：<input type="text" id="name"><br>
+		投稿内容：<textarea id="content" rows="5" cols="25"></textarea><br>
+		<button type="button" id="post_article">記事投稿</button>
+	</div>
+	<hr>
+	<!-- 記事一覧表示 -->
+	<div id="spa"></div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="js/bbs.js"></script>
+</body>
+</html>
