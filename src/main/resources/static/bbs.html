@@ -13,6 +13,14 @@
 		投稿内容：<textarea id="content" rows="5" cols="25"></textarea><br>
 		<button type="button" id="post_article">記事投稿</button>
 	</div>
+	<div>
+		ファイル投稿サンプル(サーバーに送るのみ)
+		<form id="fileUploadForm" method="post" enctype="multipart/form-data">
+			ファイル名：<input type="text" name="fileName"><br>
+			ファイル：<input type="file" name="file"><br>
+			<button type="button" id="post_file">ファイル投稿</button>
+		</form>
+	</div>
 	<hr>
 	<!-- 記事一覧表示 -->
 	<div id="spa"></div>

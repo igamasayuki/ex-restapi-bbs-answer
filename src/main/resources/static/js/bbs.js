@@ -9,7 +9,7 @@ $(function () {
   index();
   function index() {
     $.ajax({
-      url: uri + '/bbs',
+      url: uri + '/bbs/articles',
       type: 'get',
       dataType: 'json', // ←省略すると文字列のjsonを取得する
     }).done(function (json_articles_data) {
@@ -53,11 +53,11 @@ $(function () {
     console.dir('JSONデータ：' + JSON.stringify(json_data_object));
 
     $.ajax({
-      url: uri + '/bbs/postarticle',
+      url: uri + '/bbs/article',
       type: 'post',
       // dataType: 'json', // 記事情報を送るだけなので受け取り用のdataTypeは指定しない
       data: JSON.stringify(json_data_object), // リクエストパラメータにJSONを文字列として指定する
-      contentType: 'application/JSON', // JSONを送るときのContent-Typeを指定
+      contentType: 'application/json', // JSONを送るときのContent-Typeを指定
       async: true   // 非同期で処理を行う
     }).done(function () {
 
@@ -66,7 +66,7 @@ $(function () {
       $('#content').val(''); // 内容入力欄を空白にする
 
       // history.pushState(null, null, '#post'); // URL書き換え
-      location.hash = 'post';
+      // location.hash = 'post';
 
     }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
       alert('エラーが発生しました！');
@@ -83,7 +83,7 @@ $(function () {
     console.log(articleId);
 
     $.ajax({
-      url: uri + '/bbs/loadarticle/' + articleId,
+      url: uri + '/bbs/article/' + articleId,
       type: 'get',
       async: true,   // 非同期で処理を行う
       dataType: 'json', // ←省略すると文字列のjsonを取得する
@@ -109,14 +109,14 @@ $(function () {
   $(document).on('click', '#show_article_list', function () {
     index();
   }); // end 記事一覧表示
-  
+
   // 記事削除時の処理
   $(document).on('click', '#delete_article', function () {
     var articleId = $(this).val();
     console.log(articleId);
 
     $.ajax({
-      url: uri + '/bbs/deletearticle/' + articleId,
+      url: uri + '/bbs/article/' + articleId,
       type: 'delete',
       async: true,   // 非同期で処理を行う
     }).done(function () {
@@ -124,7 +124,7 @@ $(function () {
       index(); // index()関数を読んで記事一覧を再表示
 
       // history.pushState(null, null, '#delete'); // URL書き換え
-      location.hash = 'delete';
+      // location.hash = 'delete';
 
     }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
       alert('エラーが発生しました！');
@@ -135,6 +135,46 @@ $(function () {
 
   }); // end 記事削除時の処理
 
+
+  // ファイル投稿時の処理
+  $(document).on('click', '#post_file', function () {
+    // フォームを取得
+    var form = $('#fileUploadForm')[0];
+    console.log(form);
+    
+    // FormDataオブジェクトの作成
+    var data = new FormData(form);
+    console.log(data);
+
+    //If you want to add an extra field for the FormData
+    data.append("customField", "This is some extra data, testing");
+
+    //disabled the submit button
+    $("#post_file").prop("disabled", true);
+
+    $.ajax({
+      enctype: 'multipart/form-data',
+      url: uri + '/bbs/postfile',
+      type: 'post',
+      data: data,
+      async: true,   // 非同期で処理を行う
+      processData: false,
+      contentType: false,
+    }).done(function () {
+
+      index(); // index()関数を読んで記事一覧を再表示
+
+      // history.pushState(null, null, '#delete'); // URL書き換え
+      // location.hash = 'delete';
+
+    }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+      alert('エラーが発生しました！');
+      console.log('XMLHttpRequest : ' + XMLHttpRequest.status);
+      console.log('textStatus     : ' + textStatus);
+      console.log('errorThrown    : ' + errorThrown.message);
+    });
+
+  }); // end ファイル時の処理
 
   // $(window).on("hashchange", () => {
   //   // ハッシュ文字列を取得

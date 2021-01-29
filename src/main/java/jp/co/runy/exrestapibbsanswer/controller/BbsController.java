@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import jp.co.runy.exrestapibbsanswer.domain.Article;
 import jp.co.runy.exrestapibbsanswer.service.ArticleService;
@@ -37,8 +39,8 @@ public class BbsController {
 	 * 
 	 * @return 記事一覧
 	 */
-	@RequestMapping
-	public String index() {
+	@RequestMapping(value = "/articles", method = RequestMethod.GET)
+	public String articles() {
 
 		List<Article> articleList = articleService.findAll();
 
@@ -52,18 +54,18 @@ public class BbsController {
 	 * @param article 記事
 	 * @return 記事一覧
 	 */
-	@RequestMapping("/postarticle")
+	@RequestMapping(value = "/article", method = RequestMethod.POST)
 	public void postArticle(@RequestBody Article article) {
 		articleService.save(article);
 	}
 
-		/**
-	 * 記事を追加するメソッド.
+	/**
+	 * 記事を１件返すメソッド.
 	 * 
-	 * @param article 記事
-	 * @return 記事一覧
+	 * @param id 記事ID
+	 * @return 記事
 	 */
-	@RequestMapping("/loadarticle/{id}")
+	@RequestMapping(value = "/article/{id}", method = RequestMethod.GET)
 	public Article loadArticle(@PathVariable("id") int id) {
 		return articleService.load(id);
 	}
@@ -74,9 +76,23 @@ public class BbsController {
 	 * @param id 削除する記事のＩＤ
 	 * @return 記事一覧
 	 */
-	@RequestMapping("/deletearticle/{id}")
+	@RequestMapping(value = "/article/{id}", method = RequestMethod.DELETE)
 	public void deleteArticle(@PathVariable("id") int id) {
 		articleService.delete(id);
+	}
+
+	/**
+	 * ファイルを投稿するメソッド.
+	 * 
+	 * @param article 記事
+	 * @return 記事一覧
+	 */
+	@RequestMapping(value = "/postfile", method = RequestMethod.POST)
+	public void postFile(String fileName, MultipartFile file) {
+		// articleService.save(article);
+		System.out.println("ファイル名取得");
+		System.out.println(fileName);
+		System.out.println(file.getOriginalFilename());
 	}
 
 	/**
