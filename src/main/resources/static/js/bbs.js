@@ -123,9 +123,6 @@ $(function () {
 
       index(); // index()関数を読んで記事一覧を再表示
 
-      // history.pushState(null, null, '#delete'); // URL書き換え
-      // location.hash = 'delete';
-
     }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
       alert('エラーが発生しました！');
       console.log('XMLHttpRequest : ' + XMLHttpRequest.status);
@@ -164,9 +161,6 @@ $(function () {
 
       index(); // index()関数を読んで記事一覧を再表示
 
-      // history.pushState(null, null, '#delete'); // URL書き換え
-      // location.hash = 'delete';
-
     }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
       alert('エラーが発生しました！');
       console.log('XMLHttpRequest : ' + XMLHttpRequest.status);
@@ -175,26 +169,6 @@ $(function () {
     });
 
   }); // end ファイル時の処理
-
-  // $(window).on("hashchange", () => {
-  //   // ハッシュ文字列を取得
-  //   const page = location.hash.slice(1);
-  //   console.log(page);
-  //   $.get(`/html/${page}.html`).done((data) => {
-  //     $('.spa').html(data);
-  //   }).fail(() => {
-  //     error();
-  //   });
-  //   // const in_url = $.inArray(page, url_list);
-  //   // if (in_url !== -1) {
-  //   //   $.get(`/html/${page}.html`).done((data) => {
-  //   //     $('.spa').html(data);
-  //   //   }).fail(() => {
-  //   //     error();
-  //   //   });
-  //   // }
-  // });
-
 
 
 }); // end ready function
