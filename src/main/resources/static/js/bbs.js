@@ -34,7 +34,7 @@ $(function () {
 
         }
       );
-      // htmlファイルに上記で作成したhtmlタグを挿入
+      // #spaを上記で作成したhtmlタグに書き換え
       $('#spa').html(article_list_html);
     }); // end .ajax()
   } // end index function
@@ -42,7 +42,8 @@ $(function () {
 
 
   // 記事投稿時の処理
-  $(document).on('click', '#post_article', function () {
+  // #spa内ではない為、#post_articleのclickイベントをひろう
+  $('#post_article').on('click', function () {
 
     // リクエストパラメータにJSONを指定する
     var json_data_object = {
@@ -78,7 +79,8 @@ $(function () {
 
 
   // 記事１件検索時の処理
-  $(document).on('click', '#load_article', function () {
+  // #spa内に動的に追加されたボタンのため、親の#spaのclickイベントをひろう
+  $('#spa').on('click', '#load_article', function () {
     var articleId = $(this).attr("value");
     console.log(articleId);
 
@@ -99,19 +101,20 @@ $(function () {
       article_html += '<button type="button" id="show_article_list" >一覧に戻る</button>';
       article_html += '</div>';
 
-      // htmlファイルに上記で作成したhtmlタグを挿入
+      // #spaを上記で作成したhtmlタグに書き換え
       $('#spa').html(article_html);
     }); // end .ajax()
 
   }); // end 記事１件検索時の処理
 
   // 記事一覧表示 詳細画面から一覧に戻る際に使用
-  $(document).on('click', '#show_article_list', function () {
+  // #spa内に動的に追加されたボタンのため、親の#spaのclickイベントをひろう
+  $('#spa').on('click', '#show_article_list', function () {
     index();
   }); // end 記事一覧表示
 
   // 記事削除時の処理
-  $(document).on('click', '#delete_article', function () {
+  $('#spa').on('click', '#delete_article', function () {
     var articleId = $(this).val();
     console.log(articleId);
 
@@ -134,7 +137,8 @@ $(function () {
 
 
   // ファイル投稿時の処理
-  $(document).on('click', '#post_file', function () {
+  // #spa内ではない為、#post_fileのclickイベントをひろう
+  $('#post_file').on('click', function () {
     // フォームを取得
     var form = $('#fileUploadForm')[0];
     console.log(form);
