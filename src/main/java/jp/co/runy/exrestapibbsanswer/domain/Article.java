@@ -1,62 +1,61 @@
 package jp.co.runy.exrestapibbsanswer.domain;
+
+import java.util.List;
+
 /**
  * 記事を表すエンティティ.
  * 
  * @author igamasayuki
  */
-public class Article{
-  
-  /** id */
-  public Integer id;
+public class Article {
 
-  /** 名前 */
-  public String name;
+	/** id */
+	private Integer id;
 
-  /** 内容 */
-  public String content;
+	/** 名前 */
+	private String name;
 
-  public Article() {
-  }
+	/** 内容 */
+	private String content;
 
-  public Article(Integer id, String name, String content) {
-    this.id = id;
-    this.name = name;
-    this.content = content;
-  }
+	/** コメント一覧 */
+	private List<Comment> commentList;
 
-  public Integer getId() {
-    return this.id;
-  }
+	@Override
+	public String toString() {
+		return "Article [id=" + id + ", name=" + name + ", content=" + content + ", commentList=" + commentList + "]";
+	}
 
-  public void setId(Integer id) {
-    this.id = id;
-  }
+	public Integer getId() {
+		return id;
+	}
 
-  public String getName() {
-    return this.name;
-  }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-  public void setName(String name) {
-    this.name = name;
-  }
+	public String getName() {
+		return name;
+	}
 
-  public String getContent() {
-    return this.content;
-  }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-  public void setContent(String content) {
-    this.content = content;
-  }
- 
+	public String getContent() {
+		return content;
+	}
 
-  @Override
-  public String toString() {
-    return "{" +
-      " id='" + getId() + "'" +
-      ", name='" + getName() + "'" +
-      ", content='" + getContent() + "'" +
-      "}";
-  }
+	public void setContent(String content) {
+		this.content = content;
+	}
 
+	public List<Comment> getCommentList() {
+		return commentList;
+	}
+
+	public void setCommentList(List<Comment> commentList) {
+		this.commentList = commentList;
+	}
 
 }

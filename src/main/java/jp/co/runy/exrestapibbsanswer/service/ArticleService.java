@@ -31,14 +31,14 @@ public class ArticleService {
 		return articleRepository.findAll();
 	}
 
-		/**
-	 * 記事を１件検索します.
-	 * 
-	 * @param id　検索したい記事ID
-	 */
-	public Article load(int id) {
-		return articleRepository.load(id);
-	}
+//		/**
+//	 * 記事を１件検索します.
+//	 * 
+//	 * @param id　検索したい記事ID
+//	 */
+//	public Article load(int id) {
+//		return articleRepository.load(id);
+//	}
 
 	/**
 	 * 記事を登録します.

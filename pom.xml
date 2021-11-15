@@ -11,6 +11,7 @@
 	<groupId>jp.co.runy</groupId>
 	<artifactId>ex-restapi-bbs-answer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 	<name>ex-restapi-bbs-answer</name>
 	<description>Demo project for Spring Boot</description>
 
@@ -44,6 +45,12 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- デプロイ時に使用するTomcat -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -53,6 +60,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<finalName>ex-bbs-api</finalName>
 	</build>
 
 </project>
