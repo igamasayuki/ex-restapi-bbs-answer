@@ -6,7 +6,10 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,7 +49,7 @@ public class BbsController {
 	 * 
 	 * @return 記事一覧
 	 */
-	@RequestMapping(value = "/articles", method = RequestMethod.GET)
+	@GetMapping("/articles")
 	public Map<String,Object> articles() {
 
 		Map<String,Object> responseMap = new HashMap<>();
@@ -56,8 +59,6 @@ public class BbsController {
 		
 		return responseMap;
 
-//		// 取得した記事情報をJSON文字列に変換し返却
-//		return getJsonData(articleList);
 	}
 
 	/**
@@ -66,7 +67,7 @@ public class BbsController {
 	 * @param article 記事
 	 * @return 記事一覧
 	 */
-	@RequestMapping(value = "/article", method = RequestMethod.POST)
+	@PostMapping("/article")
 	public void postArticle(@RequestBody Article article) {
 		articleService.save(article);
 	}
@@ -82,17 +83,6 @@ public class BbsController {
 //		return articleService.load(id);
 //	}
 
-//	/**
-//	 * 記事を削除するメソッド.
-//	 * 
-//	 * @param id 削除する記事のＩＤ
-//	 * @return 記事一覧
-//	 */
-//	@RequestMapping(value = "/article/{id}", method = RequestMethod.DELETE)
-//	public void deleteArticle(@PathVariable("id") int id) {
-//		articleService.delete(id);
-//	}
-
 	/**
 	 * コメントを投稿します.
 	 * 
@@ -104,7 +94,7 @@ public class BbsController {
 	 *            モデル
 	 * @return 掲示板画面
 	 */
-	@RequestMapping(value = "/comment", method = RequestMethod.POST)
+	@PostMapping("/comment")
 	public void postcomment(@RequestBody Comment comment) {
 		commentService.save(comment);
 	}
@@ -116,7 +106,7 @@ public class BbsController {
 	 *            記事フォーム
 	 * @return 記事登録画面
 	 */
-	@RequestMapping(value = "/article/{articleId}", method = RequestMethod.DELETE)
+	@DeleteMapping("/article/{articleId}")
 	public void deletearticle(@PathVariable("articleId") int articleId) {
 		articleService.delete(articleId);
 	}
@@ -136,20 +126,4 @@ public class BbsController {
 //		System.out.println(file.getOriginalFilename());
 //	}
 
-//	/**
-//	 * 引数のオブジェクトをJSON文字列に変換する
-//	 * 
-//	 * @param data オブジェクトのデータ
-//	 * @return 変換後JSON文字列
-//	 */
-//	private String getJsonData(Object data) {
-//		String retVal = null;
-//		ObjectMapper objectMapper = new ObjectMapper();
-//		try {
-//			retVal = objectMapper.writeValueAsString(data);
-//		} catch (JsonProcessingException e) {
-//			System.err.println(e);
-//		}
-//		return retVal;
-//	}
 }
